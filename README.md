@@ -1,7 +1,7 @@
 # 🎟️ Microservice Ticketing Platform
 
 A scalable **microservices-based ticket marketplace** that allows users to **sell and purchase tickets securely**.  
-Built with **Node.js, TypeScript, and an event-driven architecture**, following real-world production practices.
+Built with **Node.js, TypeScript, Next.js, Docker, Kubernetes and an event-driven architecture**, following real-world production practices.
 
 ---
 
@@ -10,6 +10,7 @@ Built with **Node.js, TypeScript, and an event-driven architecture**, following 
 This project is a **distributed ticketing platform** where any authenticated user can act as both a **seller** and a **buyer**.
 
 Key features:
+
 - Users can create, sell, and purchase tickets
 - Tickets are **locked for 15 minutes** during purchase attempts
 - Only one user can reserve a ticket at a time
@@ -38,16 +39,39 @@ The system is designed to be **scalable, fault-tolerant, and cloud-ready** using
 The platform is composed of the following independent services:
 
 ### 🔐 Auth Service
+
 Handles everything related to users:
+
 - User signup
 - User signin
 - User signout
-- JWT-based authentication & authorization
+- (Shared JWT Secret) authentication & authorization
+- Allow multiple services to trust the same JWT.
+
+Token Strategy
+
+- Access Token (short-lived, used for APIs)
+
+- Refresh Token (long-lived, used only to get new access tokens)
+
+| Token         | Lifetime  | Stored In        | Usage              |
+| ------------- | --------- | ---------------- | ------------------ |
+| Access Token  | 15 min    | HTTP-only cookie | API auth           |
+| Refresh Token | 7–30 days | HTTP-only cookie | Renew access token |
+
+Auth Flow Summary:
+
+Signup → Hash Password → Generate JWT → Store in Cookie
+Signin → Validate Password → Generate JWT → Store in Cookie
+Protected Route → Verify JWT → Allow Access
+Signout → Clear Cookie
 
 ---
 
 ### 🎫 Ticket Service
+
 Manages ticket lifecycle:
+
 - Create tickets
 - Edit ticket details (title, price)
 - Prevent updates when tickets are reserved
@@ -56,7 +80,9 @@ Manages ticket lifecycle:
 ---
 
 ### 🛒 Orders Service
+
 Manages ticket reservations:
+
 - Create orders
 - Track order states (Created, Cancelled, Completed)
 - Ensure a ticket is reserved by only one user
@@ -65,7 +91,9 @@ Manages ticket reservations:
 ---
 
 ### ⏱️ Expiration Service
+
 Handles order timeouts:
+
 - Listens for newly created orders
 - Starts a **15-minute expiration timer**
 - Automatically cancels expired orders
@@ -74,7 +102,9 @@ Handles order timeouts:
 ---
 
 ### 💳 Payments Service
+
 Handles payment processing:
+
 - Process credit card payments
 - Complete orders on successful payment
 - Cancel orders on payment failure
@@ -85,17 +115,24 @@ Handles payment processing:
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - Node.js
 - Express
 - TypeScript
 
+### FrontEnd
+
+- Next.js
+
 ### Infrastructure & DevOps
+
 - Docker
 - Kubernetes (K8s)
 - Skaffold
 - NGINX Ingress Controller
 
 ### Communication & Security
+
 - NATS (Event Bus)
 - JWT Authentication
 
@@ -110,7 +147,7 @@ Handles payment processing:
 - Kubernetes-based deployment
 - Production-ready development workflow
 
-
 ## 👨‍💻 Author
+
 **Ahmed Heikal**  
 Backend Engineer

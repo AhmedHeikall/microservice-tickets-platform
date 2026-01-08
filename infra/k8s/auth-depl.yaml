@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: ahmedheikal/auth
+          image: ahmed/auth
+
 
 ---
 apiVersion: v1

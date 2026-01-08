@@ -7,7 +7,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: ahmedheikal/auth
+    - image: ahmed/auth
       context: auth
       docker:
         dockerfile: Dockerfile
