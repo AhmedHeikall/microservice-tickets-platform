@@ -116,7 +116,7 @@ Handles payment processing:
 
 ### Client Service
 
-Handles payment processing:
+
 
 ---
 
