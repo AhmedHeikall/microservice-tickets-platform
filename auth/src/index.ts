@@ -4,6 +4,7 @@ import { authRouter } from "./routes/auth.routes";
 
 const app = express();
 app.use(json());
+
 app.use(authRouter);
 
 app.listen(3000, () => {

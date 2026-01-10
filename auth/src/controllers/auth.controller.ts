@@ -1,4 +1,6 @@
-export const signup = async (req: any, res: any) => {
+import { Request, Response } from "express";
+
+export const signup = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   // TODO:
@@ -6,9 +8,10 @@ export const signup = async (req: any, res: any) => {
   // 2. Hash password
   // 3. Save user in DB
   // 4. Generate JWT
+  res.send({});
 };
 
-export const signin = async (req: any, res: any) => {
+export const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   // TODO:
@@ -17,7 +20,7 @@ export const signin = async (req: any, res: any) => {
   // 3. Generate JWT (access + refresh tokens)
   // 4. Store tokens in session / cookies
 };
-export const signout = async (req: any, res: any) => {
+export const signout = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   // TODO:

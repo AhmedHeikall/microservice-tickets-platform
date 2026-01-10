@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
-import { signup } from "../controllers/auth.controller";
 import { validateRequest } from "../middlewares/validate-request";
+import { signin, signout, signup } from "../controllers/auth.controller";
 
 const router = express.Router();
 
@@ -21,22 +21,15 @@ router.post(
       .withMessage("Password must contain an uppercase letter")
       .matches(/[0-9]/)
       .withMessage("Password must contain a number"),
-
-    body("confirmPassword").custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error("Passwords do not match");
-      }
-      return true;
-    }),
   ],
   validateRequest,
   signup
 );
 
 // signin
-router.post("/api/users/signin", () => {});
+router.post("/api/users/signin", signin);
 
 //signout
-router.post("/api/users/signout", () => {});
+router.post("/api/users/signout", signout);
 
 export { router as authRouter };

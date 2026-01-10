@@ -16,6 +16,10 @@ Key features:
 - Only one user can reserve a ticket at a time
 - Automatic order cancellation if payment fails or time expires
 - Fully event-driven communication between services
+- Optimistic concurrency control for safe updates
+- Secure payment handling workflow
+- Server-side rendering with Next.js
+- Shared code and types across services
 
 The system is designed to be **scalable, fault-tolerant, and cloud-ready** using Kubernetes.
 
@@ -61,10 +65,10 @@ Token Strategy
 
 Auth Flow Summary:
 
-Signup → Hash Password → Generate JWT → Store in Cookie
-Signin → Validate Password → Generate JWT → Store in Cookie
-Protected Route → Verify JWT → Allow Access
-Signout → Clear Cookie
+- Signup → Hash Password → Generate JWT → Store in Cookie
+- Signin → Validate Password → Generate JWT → Store in Cookie
+- Protected Route → Verify JWT → Allow Access
+- Signout → Clear Cookie
 
 ---
 
@@ -110,6 +114,10 @@ Handles payment processing:
 - Cancel orders on payment failure
 - Emit payment and completion events
 
+### Client Service
+
+Handles payment processing:
+
 ---
 
 ## 🛠️ Tech Stack
@@ -122,13 +130,15 @@ Handles payment processing:
 
 ### FrontEnd
 
-- Next.js
+- Next.js (Server-Side Rendering)
 
 ### Infrastructure & DevOps
 
 - Docker
 - Kubernetes (K8s)
-- Skaffold
+- CI/CD pipeline for automated testing and deployment
+- Event Bus: NATS Streaming Server
+- Dev Workflow: Skaffold
 - NGINX Ingress Controller
 
 ### Communication & Security
@@ -151,3 +161,6 @@ Handles payment processing:
 
 **Ahmed Heikal**  
 Backend Engineer
+
+
+project in progress...
